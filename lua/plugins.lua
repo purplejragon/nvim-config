@@ -1,30 +1,46 @@
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  use 'ishan9299/nvim-solarized-lua'
+  use 'marko-cerovac/material.nvim'
+
+  use 'neovim/nvim-lspconfig'
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
+
+  use 'windwp/nvim-ts-autotag'
+  use 'jiangmiao/auto-pairs'
+  use 'sbdchd/neoformat'
+
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-  use 'ishan9299/nvim-solarized-lua'
-  use 'neovim/nvim-lspconfig'
-
-  use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-nvim-lsp'
-
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 end)
 
 -- treesitter config
 require('nvim-treesitter.configs').setup {
   highlight = {
     enable = true
+  },
+  indent = {
+    enable = true
   }
 }
 
--- solarized config
+-- nvim-ts-autotag config
+require('nvim-ts-autotag').setup()
+
+-- theme config
 vim.opt.termguicolors = true
-vim.cmd([[colorscheme solarized]])
+vim.g.material_style = 'darker'
+vim.cmd([[colorscheme material]])
 
 -- nvim-cmp/luasnip config
 local has_words_before = function()
@@ -87,4 +103,10 @@ lspconfig.html.setup { capabilities = c }
 lspconfig.cssls.setup { capabilities = c }
 lspconfig.tsserver.setup { capabilities = c }
 lspconfig.emmet_ls.setup { capabilities = c }
-
+lspconfig.gopls.setup { capabilities = c }
+lspconfig.tailwindcss.setup { capabilities = c }
+lspconfig.volar.setup { capabilities = c }
+lspconfig.jsonls.setup { capabilities = c }
+lspconfig.ocamllsp.setup { capabilities = c }
+-- telescope config
+require('telescope').setup()

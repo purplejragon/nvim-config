@@ -26,7 +26,7 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
   'n',
   '<leader>f',
-  ':lua vim.lsp.buf.formatting()<CR>',
+  ':Neoformat<CR>',
   { noremap = true, silent = true }
 )
 
