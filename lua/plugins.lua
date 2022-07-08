@@ -1,14 +1,15 @@
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
-  use 'ishan9299/nvim-solarized-lua'
-  use 'marko-cerovac/material.nvim'
+  use 'folke/tokyonight.nvim'
 
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
+  use 'kyazdani42/nvim-tree.lua'
+  use 'kyazdani42/nvim-web-devicons'
 
   use 'windwp/nvim-ts-autotag'
   use 'jiangmiao/auto-pairs'
@@ -34,13 +35,16 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
+-- nvim-tree config
+require('nvim-tree').setup()
+
 -- nvim-ts-autotag config
 require('nvim-ts-autotag').setup()
 
 -- theme config
 vim.opt.termguicolors = true
-vim.g.material_style = 'darker'
-vim.cmd([[colorscheme material]])
+vim.g.tokyonight_style = 'night'
+vim.cmd([[colorscheme tokyonight]])
 
 -- nvim-cmp/luasnip config
 local has_words_before = function()
@@ -108,5 +112,6 @@ lspconfig.tailwindcss.setup { capabilities = c }
 lspconfig.volar.setup { capabilities = c }
 lspconfig.jsonls.setup { capabilities = c }
 lspconfig.ocamllsp.setup { capabilities = c }
+lspconfig.svelte.setup { capabilities = c }
 -- telescope config
 require('telescope').setup()
